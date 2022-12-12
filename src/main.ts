@@ -11,16 +11,12 @@ import semverLt from 'semver/functions/lt';
 
 type Args = {
   repoToken: string;
-  automaticReleaseTag: string;
-  releaseTitle: string;
   files: string[];
 };
 
 const getAndValidateArgs = (): Args => {
   const args = {
     repoToken: core.getInput('repo_token', {required: true}),
-    automaticReleaseTag: core.getInput('automatic_release_tag', {required: false}),
-    releaseTitle: core.getInput('title', {required: false}),
     files: [] as string[],
   };
 
@@ -256,7 +252,7 @@ export const main = async (): Promise<void> => {
     core.endGroup();
 
     core.startGroup('Determining release tags');
-    const releaseTag = parseGitTag(context.ref);
+    const releaseTag = "latest";//parseGitTag(context.ref);
     if (!releaseTag) {
       throw new Error(
         `The parameter "automatic_release_tag" was not set and this does not appear to be a GitHub tag event. (Event: ${context.ref})`,

@@ -1,6 +1,10 @@
 name: "Create Release Body"
 author: "unl0ck"
 description: "Automate to create Release body"
+inputs:
+  repo_token:
+    description: "GitHub secret token"
+    required: true
 outputs:
   release_body:
     description: "Generated Release body"
