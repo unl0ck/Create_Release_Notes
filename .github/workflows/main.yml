@@ -9,5 +9,6 @@ jobs:
         uses: unl0ck/action-automatic-releases@master
         with:
           repo_token: ${{ secrets.TOKEN }}
+          automatic_release_tag: "latest"
       - name: "echo"
         run: echo ${{steps.build_changelog.outputs.release_body}}
