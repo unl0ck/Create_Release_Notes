@@ -1,0 +1,9 @@
+name: "Create Release Body"
+author: "unl0ck"
+description: "Automate to create Release body"
+outputs:
+  release_body:
+    description: "Generated Release body"
+runs:
+  using: "node16"
+  main: "dist/index.js"
