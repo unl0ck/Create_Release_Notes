@@ -269,7 +269,7 @@ export const main = async (): Promise<void> => {
       {
         owner: context.repo.owner,
         repo: context.repo.repo,
-        ref: `tags/${previousReleaseTag}`,
+        ref: context.ref,
       },
       context.sha,
     );
