@@ -1,0 +1,13 @@
+name: Testing
+on: push
+jobs:
+  check_builds:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Build Changelog"
+        id: build_changelog
+        uses: unl0ck/Create_Release_Notes@v0.0.1
+        with:
+          repo_token: ${{ secrets.TOKEN }}
+      - name: "echo"
+        run: echo ${{steps.build_changelog.outputs.release_body}}
