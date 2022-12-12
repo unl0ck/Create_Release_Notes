@@ -88,7 +88,7 @@ const searchForPreviousReleaseTag = async (
   currentReleaseTag: string,
   tagInfo: Octokit.ReposListTagsParams,
 ): Promise<string> => {
-  const validSemver = semverValid(currentReleaseTag);
+  const validSemver = "latest";//semverValid(currentReleaseTag);
   if (!validSemver) {
     throw new Error(
       `The parameter "automatic_release_tag" was not set and the current tag "${currentReleaseTag}" does not appear to conform to semantic versioning.`,
