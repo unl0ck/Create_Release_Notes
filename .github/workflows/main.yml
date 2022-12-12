@@ -6,7 +6,7 @@ jobs:
     steps:
       - name: "Build Changelog"
         id: build_changelog
-        uses: unl0ck/Create_Release_Notes@v0.0.1
+        uses: unl0ck/Create_Release_Notes@main
         with:
           repo_token: ${{ secrets.TOKEN }}
       - name: "echo"
