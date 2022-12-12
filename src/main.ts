@@ -250,9 +250,8 @@ export const main = async (): Promise<void> => {
 
     core.debug(`Github context: ${JSON.stringify(context)}`);
     core.endGroup();
-
     core.startGroup('Determining release tags');
-    const releaseTag = "0.0.0";//parseGitTag(context.ref);
+    const releaseTag = parseGitTag(context.ref);
     if (!releaseTag) {
       throw new Error(
         `The parameter "automatic_release_tag" was not set and this does not appear to be a GitHub tag event. (Event: ${context.ref})`,
@@ -264,19 +263,19 @@ export const main = async (): Promise<void> => {
           repo: context.repo.repo,
         });
     core.endGroup();
-
+    core.startGroup('get Commits');
     const commitsSinceRelease = await getCommitsSinceRelease(
       client,
       {
         owner: context.repo.owner,
         repo: context.repo.repo,
-        ref: context.ref,
+        ref: `tags/${previousReleaseTag}`,
       },
       context.sha,
     );
 
     const changelog = await getChangelog(client, context.repo.owner, context.repo.repo, commitsSinceRelease);
-
+    core.endGroup();
     core.debug(`Exporting environment variable AUTOMATIC_RELEASES_TAG with value ${releaseTag}`);
     core.debug(changelog);
     core.exportVariable('AUTOMATIC_RELEASES_TAG', releaseTag);
