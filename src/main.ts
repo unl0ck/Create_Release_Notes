@@ -278,6 +278,7 @@ export const main = async (): Promise<void> => {
     const changelog = await getChangelog(client, context.repo.owner, context.repo.repo, commitsSinceRelease);
 
     core.debug(`Exporting environment variable AUTOMATIC_RELEASES_TAG with value ${releaseTag}`);
+    core.debug(changelog);
     core.exportVariable('AUTOMATIC_RELEASES_TAG', releaseTag);
 	core.setOutput('release_body',changelog);
   } catch (error:any) {
