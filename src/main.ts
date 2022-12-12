@@ -89,11 +89,11 @@ const searchForPreviousReleaseTag = async (
   tagInfo: Octokit.ReposListTagsParams,
 ): Promise<string> => {
   const validSemver = "latest";//semverValid(currentReleaseTag);
-  if (!validSemver) {
+  /*if (!validSemver) {
     throw new Error(
       `The parameter "automatic_release_tag" was not set and the current tag "${currentReleaseTag}" does not appear to conform to semantic versioning.`,
     );
-  }
+  }*/
 
   const listTagsOptions = client.repos.listTags.endpoint.merge(tagInfo);
   const tl = await client.paginate(listTagsOptions);
@@ -253,11 +253,11 @@ export const main = async (): Promise<void> => {
 
     core.startGroup('Determining release tags');
     const releaseTag = "latest";//parseGitTag(context.ref);
-    if (!releaseTag) {
+    /*if (!releaseTag) {
       throw new Error(
         `The parameter "automatic_release_tag" was not set and this does not appear to be a GitHub tag event. (Event: ${context.ref})`,
       );
-    }
+    }*/
 
     const previousReleaseTag = await searchForPreviousReleaseTag(client, releaseTag, {
           owner: context.repo.owner,
